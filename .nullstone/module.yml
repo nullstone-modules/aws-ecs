@@ -1,0 +1,13 @@
+org_name: nullstone
+name: aws-ecs
+friendly_name: ECS Cluster
+description: Creates a standard ECS cluster backed by an EC2 Auto-scaling group
+category: cluster
+subcategory: ""
+provider_types:
+    - aws
+platform: ecs
+subplatform: ec2
+type: ""
+appCategories: []
+is_public: true
