@@ -51,3 +51,31 @@ EOF
     error_message = "Max Scaling Step must be between 1 and 10000"
   }
 }
+
+variable "max_node_count" {
+  type        = number
+  default     = 3
+  description = <<EOF
+This places a hard cap on the number of nodes that the ECS cluster will provision.
+If the cluster reaches the max node count and new jobs are pending,
+they will not leave the PROVISIONING state until this is increased or resources free up.
+See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-considerations
+EOF
+}
+
+variable "node_instance_type" {
+  type        = string
+  default     = "m6g.medium"
+  description = <<EOF
+The instance type of the nodes launched with container workloads on them.
+See https://aws.amazon.com/ec2/instance-types/ for a list of instance types.
+EOF
+}
+
+variable "node_volume_size" {
+  type        = number
+  default     = 10
+  description = <<EOF
+The number of gigabytes to allocates for the root volume on each node.
+EOF
+}

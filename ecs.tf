@@ -1,5 +1,9 @@
+locals {
+  cluster_name = local.resource_name
+}
+
 resource "aws_ecs_cluster" "this" {
-  name = local.resource_name
+  name = local.cluster_name
   tags = local.tags
 
   // TODO: Enable execute command with encryption configured on logging
@@ -21,6 +25,7 @@ resource "aws_ecs_cluster_capacity_providers" "this" {
   }
 }
 
+// https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-considerations
 resource "aws_ecs_capacity_provider" "this" {
   name = local.resource_name
 
