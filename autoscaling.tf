@@ -1,8 +1,9 @@
 // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers-create-auto-scaling-group.html#using-warm-pool
 resource "aws_autoscaling_group" "this" {
-  name                 = local.resource_name
-  vpc_zone_identifier  = local.private_subnet_ids
-  launch_configuration = aws_launch_configuration.this.name
+  name                  = local.resource_name
+  vpc_zone_identifier   = local.private_subnet_ids
+  launch_configuration  = aws_launch_configuration.this.name
+  protect_from_scale_in = true
 
   // NOTE: The auto-scaling is managed by the ecs capacity provider
   //       max_size puts a hard cap on the ecs capacity provider
