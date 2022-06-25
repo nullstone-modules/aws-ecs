@@ -25,6 +25,7 @@ resource "aws_launch_configuration" "this" {
 
 resource "aws_security_group" "this" {
   name        = local.resource_name
+  vpc_id      = local.vpc_id
   description = "Security for each node in ${local.resource_name} ECS cluster"
   tags        = local.tags
 }
