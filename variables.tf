@@ -35,7 +35,7 @@ EOF
 
   validation {
     condition     = var.min_scaling_step >= 1 && var.min_scaling_step <= 10000
-    error_message = "Min Scaling Step must be between 1 and 10000"
+    error_message = "Min Scaling Step must be between 1 and 10000."
   }
 }
 
@@ -48,7 +48,7 @@ EOF
 
   validation {
     condition     = var.max_scaling_step >= 1 && var.max_scaling_step <= 10000
-    error_message = "Max Scaling Step must be between 1 and 10000"
+    error_message = "Max Scaling Step must be between 1 and 10000."
   }
 }
 
