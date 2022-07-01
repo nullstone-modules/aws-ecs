@@ -65,7 +65,7 @@ EOF
 
 variable "node_instance_type" {
   type        = string
-  default     = "m6a.medium"
+  default     = "m6a.large"
   description = <<EOF
 The instance type of the nodes launched with container workloads on them.
 See https://aws.amazon.com/ec2/instance-types/ for a list of instance types.
