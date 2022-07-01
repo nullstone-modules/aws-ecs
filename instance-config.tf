@@ -11,7 +11,7 @@ locals {
 }
 
 resource "aws_launch_configuration" "this" {
-  name            = local.resource_name
+  name_prefix     = local.resource_name
   image_id        = local.ami
   instance_type   = var.node_instance_type
   security_groups = [aws_security_group.this.id]
@@ -20,6 +20,10 @@ resource "aws_launch_configuration" "this" {
   root_block_device {
     volume_type = "gp3"
     volume_size = var.node_volume_size
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
