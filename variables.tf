@@ -74,7 +74,7 @@ EOF
 
 variable "node_volume_size" {
   type        = number
-  default     = 10
+  default     = 30
   description = <<EOF
 The number of gigabytes to allocates for the root volume on each node.
 EOF
