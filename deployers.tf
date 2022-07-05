@@ -53,4 +53,17 @@ data "aws_iam_policy_document" "deployer" {
       values   = [aws_ecs_cluster.this.arn]
     }
   }
+
+  statement {
+    sid       = "AllowRunTask"
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = ["ecs:RunTask"]
+
+    condition {
+      test     = "ArnEquals"
+      variable = "ecs:cluster"
+      values   = [aws_ecs_cluster.this.arn]
+    }
+  }
 }
