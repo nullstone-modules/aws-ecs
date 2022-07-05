@@ -24,5 +24,5 @@ data "aws_iam_policy_document" "this_assume" {
 // See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html
 resource "aws_iam_role_policy_attachment" "container_service" {
   role       = aws_iam_role.this.name
-  policy_arn = "AmazonEC2ContainerServiceforEC2Role"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
