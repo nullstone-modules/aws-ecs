@@ -11,16 +11,20 @@ locals {
 }
 
 resource "aws_launch_configuration" "this" {
-  name_prefix     = local.resource_name
-  image_id        = local.ami
-  instance_type   = var.node_instance_type
-  security_groups = [aws_security_group.this.id]
-  user_data       = local.user_data
+  name_prefix          = local.resource_name
+  image_id             = local.ami
+  instance_type        = var.node_instance_type
+  security_groups      = [aws_security_group.this.id]
+  user_data            = local.user_data
+  iam_instance_profile = aws_iam_instance_profile.this.name
 
   root_block_device {
     volume_type = "gp3"
     volume_size = var.node_volume_size
   }
+
+  // TODO: Mount volume for /dev/xvdcz (docker use) -> this can be used to tune docker image storage
+  //       See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
 
   lifecycle {
     create_before_destroy = true
