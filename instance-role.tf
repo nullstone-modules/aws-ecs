@@ -4,7 +4,7 @@ resource "aws_iam_instance_profile" "this" {
 }
 
 resource "aws_iam_role" "this" {
-  role               = local.resource_name
+  name               = local.resource_name
   assume_role_policy = data.aws_iam_policy_document.this_assume.json
 }
 
