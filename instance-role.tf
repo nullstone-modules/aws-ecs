@@ -10,7 +10,6 @@ resource "aws_iam_role" "this" {
 
 data "aws_iam_policy_document" "this_assume" {
   statement {
-    sid     = "Allow EC2 instance to assume role"
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
