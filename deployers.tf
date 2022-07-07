@@ -42,23 +42,11 @@ data "aws_iam_policy_document" "deployer" {
       "ecs:DescribeServices",
       "ecs:UpdateService",
       "ecs:*Tasks",
+      "ecs:RunTask",
       "ecs:ExecuteCommand",
     ]
 
     resources = ["*"]
-
-    condition {
-      test     = "StringEquals"
-      variable = "ecs:cluster"
-      values   = [aws_ecs_cluster.this.arn]
-    }
-  }
-
-  statement {
-    sid       = "AllowRunTask"
-    effect    = "Allow"
-    resources = ["*"]
-    actions   = ["ecs:RunTask"]
 
     condition {
       test     = "ArnEquals"
