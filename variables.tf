@@ -52,6 +52,16 @@ EOF
   }
 }
 
+variable "min_node_count" {
+  type        = number
+  default     = 0
+  description = <<EOF
+This places a minimum quota on the number of nodes that the ECS cluster will provision.
+If the cluster is idle, AWS will not scale-in below this number of nodes.
+See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-considerations
+EOF
+}
+
 variable "max_node_count" {
   type        = number
   default     = 3

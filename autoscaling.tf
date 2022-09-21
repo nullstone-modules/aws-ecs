@@ -7,7 +7,7 @@ resource "aws_autoscaling_group" "this" {
 
   // NOTE: The auto-scaling is managed by the ecs capacity provider
   //       max_size puts a hard cap on the ecs capacity provider
-  min_size                  = 0
+  min_size                  = var.min_node_count
   max_size                  = var.max_node_count
   health_check_grace_period = var.warmup_period
 
