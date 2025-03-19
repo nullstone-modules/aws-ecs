@@ -1,9 +1,14 @@
 locals {
   cluster_name = local.resource_name
+  valid_cluster_name = (
+    can(regex("^(aws|ecs|fargate)", local.cluster_name))
+    ? "_${local.cluster_name}"
+    : local.cluster_name
+  )
 }
 
 resource "aws_ecs_cluster" "this" {
-  name = local.cluster_name
+  name = local.valid_cluster_name
   tags = local.tags
 
   // TODO: Enable execute command with encryption configured on logging
