@@ -1,3 +1,6 @@
+# 0.2.2 (Mar 19, 2025)
+* Sanitize invalid capacity provider name (i.e. starts with `aws`, `ecs`, or `fargate`).
+
 # 0.2.1 (Mar 19, 2025)
 * Sanitize invalid cluster name (i.e. starts with `aws`, `ecs`, or `fargate`).
 

@@ -5,6 +5,12 @@ locals {
     ? "_${local.cluster_name}"
     : local.cluster_name
   )
+
+  valid_capacity_provider_name = (
+    can(regex("^(aws|ecs|fargate)", local.resource_name))
+    ? "_${local.resource_name}"
+    : local.resource_name
+  )
 }
 
 resource "aws_ecs_cluster" "this" {
@@ -32,7 +38,7 @@ resource "aws_ecs_cluster_capacity_providers" "this" {
 
 // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-considerations
 resource "aws_ecs_capacity_provider" "this" {
-  name = local.resource_name
+  name = local.valid_capacity_provider_name
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.this.arn
