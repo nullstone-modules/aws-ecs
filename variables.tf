@@ -89,3 +89,12 @@ variable "node_volume_size" {
 The number of gigabytes to allocates for the root volume on each node.
 EOF
 }
+
+variable "docker_volume_size" {
+  type        = number
+  default     = 100
+  description = <<EOF
+The size of the storage volume used for Docker in gigabytes.
+This storage is used by Docker for building images and docker volumes.
+EOF
+}

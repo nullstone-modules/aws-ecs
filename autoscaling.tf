@@ -31,10 +31,18 @@ resource "aws_autoscaling_group" "this" {
 locals {
   // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html
   // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
-  user_data = join("\n", [
-    "#!/bin/bash",
-    "echo ECS_CLUSTER=${aws_ecs_cluster.this.name} >> /etc/ecs/ecs.config",
-  ])
+  user_data = <<EOF
+#!/bin/bash
+
+# Format and mount extra disk for Docker usage
+mkfs -t xfs /dev/xvdcz
+mkdir -p /var/lib/docker
+echo '/dev/xvdcz /var/lib/docker xfs defaults,noatime 0 0' >> /etc/fstab
+mount -a
+
+# Configure ECS agent
+echo ECS_CLUSTER=${aws_ecs_cluster.this.name} >> /etc/ecs/ecs.config
+EOF
 }
 
 resource "aws_launch_template" "this" {
@@ -43,6 +51,12 @@ resource "aws_launch_template" "this" {
   instance_type          = var.node_instance_type
   vpc_security_group_ids = [aws_security_group.this.id]
   user_data              = base64encode(local.user_data)
+  tags                   = local.tags
+
+  tag_specifications {
+    resource_type = "instance"
+    tags          = merge(local.tags, { "Name" = "${local.block_name}/node" })
+  }
 
   iam_instance_profile {
     name = aws_iam_instance_profile.this.name
@@ -57,8 +71,15 @@ resource "aws_launch_template" "this" {
     }
   }
 
-  // TODO: Mount volume for /dev/xvdcz (docker use) -> this can be used to tune docker image storage
-  //       See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+  // Additional storage volume dedicated to Docker
+  block_device_mappings {
+    device_name = "/dev/xvdcz"
+
+    ebs {
+      volume_type = "gp3"
+      volume_size = var.docker_volume_size
+    }
+  }
 
   lifecycle {
     create_before_destroy = true

@@ -1,3 +1,6 @@
+# 0.2.3 (Apr 28, 2025)
+* Added a secondary storage volume dedicated to Docker. (`var.docker_volume_size`)
+
 # 0.2.2 (Mar 19, 2025)
 * Sanitize invalid capacity provider name (i.e. starts with `aws`, `ecs`, or `fargate`).
 
