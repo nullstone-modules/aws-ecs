@@ -1,3 +1,9 @@
+## 0.2.5 (Jul 09, 2025)
+* Added `ecs:ListTagsForResource`, `ecs:DescribeTasks` to deployer policy.
+
+# 0.2.4 (Apr 28, 2025)
+* Pin AWS provider to 5.95.0. 
+
 # 0.2.3 (Apr 28, 2025)
 * Added a secondary storage volume dedicated to Docker. (`var.docker_volume_size`)
 

@@ -14,10 +14,12 @@ data "aws_iam_policy_document" "deployer" {
     effect = "Allow"
 
     actions = [
+      "ecs:DescribeTasks",
       "ecs:ListTaskDefinitions",
       "ecs:DescribeTaskDefinition",
       "ecs:RegisterTaskDefinition",
       "ecs:DeregisterTaskDefinition",
+      "ecs:ListTagsForResource",
     ]
 
     resources = ["*"]
