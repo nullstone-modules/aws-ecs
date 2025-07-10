@@ -1,3 +1,6 @@
+## 0.2.6 (Jul 10, 2025)
+* Added `ecs:TagResource` to deployer policy.
+
 ## 0.2.5 (Jul 09, 2025)
 * Added `ecs:ListTagsForResource`, `ecs:DescribeTasks` to deployer policy.
 
