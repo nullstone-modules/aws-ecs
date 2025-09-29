@@ -17,3 +17,8 @@ output "capacity_provider_name" {
   value       = aws_ecs_capacity_provider.this.name
   description = "string ||| The name of the capacity provider used by the cluster. This provides a hook into the same compute resources for provisioning ECS tasks."
 }
+
+output "log_retention_in_days" {
+  value       = var.log_retention_in_days
+  description = "number ||| The retention period for the CloudWatch logs for each ECS service in this cluster."
+}

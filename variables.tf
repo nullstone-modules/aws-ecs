@@ -98,3 +98,16 @@ The size of the storage volume used for Docker in gigabytes.
 This storage is used by Docker for building images and docker volumes.
 EOF
 }
+
+variable "log_retention_in_days" {
+  type        = number
+  default     = 365
+  description = <<EOF
+This defines the retention period for the CloudWatch logs for each ECS service in this cluster.
+EOF
+
+  validation {
+    condition     = var.log_retention_in_days >= 1
+    error_message = "log_retention_in_days must be at least 1 day"
+  }
+}

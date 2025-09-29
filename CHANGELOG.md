@@ -1,3 +1,6 @@
+## 0.2.7 (Sep 29, 2025)
+* Added `var.log_retention_in_days` to dictate log retention on all apps in the cluster.
+
 ## 0.2.6 (Jul 10, 2025)
 * Added `ecs:TagResource` to deployer policy.
 

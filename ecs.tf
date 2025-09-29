@@ -39,6 +39,7 @@ resource "aws_ecs_cluster_capacity_providers" "this" {
 // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-considerations
 resource "aws_ecs_capacity_provider" "this" {
   name = local.valid_capacity_provider_name
+  tags = local.tags
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.this.arn
