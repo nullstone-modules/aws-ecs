@@ -1,10 +1,13 @@
-## 0.2.7 (Sep 29, 2025)
+# 0.2.8 (Feb 10, 2026)
+* Added IAM policy for deployers that can be attached to IAM Roles.
+
+# 0.2.7 (Sep 29, 2025)
 * Added `var.log_retention_in_days` to dictate log retention on all apps in the cluster.
 
-## 0.2.6 (Jul 10, 2025)
+# 0.2.6 (Jul 10, 2025)
 * Added `ecs:TagResource` to deployer policy.
 
-## 0.2.5 (Jul 09, 2025)
+# 0.2.5 (Jul 09, 2025)
 * Added `ecs:ListTagsForResource`, `ecs:DescribeTasks` to deployer policy.
 
 # 0.2.4 (Apr 28, 2025)

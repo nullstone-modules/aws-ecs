@@ -58,3 +58,9 @@ data "aws_iam_policy_document" "deployer" {
     }
   }
 }
+
+resource "aws_iam_policy" "deployers" {
+  name   = local.resource_name
+  tags   = local.tags
+  policy = data.aws_iam_policy_document.deployer.json
+}
