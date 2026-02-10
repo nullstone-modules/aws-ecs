@@ -1,3 +1,6 @@
+# 0.2.9 (Feb 10, 2026)
+* Added `deployers_policy_arn` to outputs.
+
 # 0.2.8 (Feb 10, 2026)
 * Added IAM policy for deployers that can be attached to IAM Roles.
 
