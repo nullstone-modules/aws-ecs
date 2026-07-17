@@ -45,6 +45,11 @@ resource "aws_ecs_capacity_provider" "this" {
     auto_scaling_group_arn         = aws_autoscaling_group.this.arn
     managed_termination_protection = "ENABLED"
 
+    // ECS drains tasks off an instance before the ASG is allowed to terminate it.
+    // Without this, instances forced out by an instance refresh have their tasks killed outright.
+    // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instance-draining.html
+    managed_draining = "ENABLED"
+
     managed_scaling {
       status                 = "ENABLED"
       target_capacity        = var.target_capacity

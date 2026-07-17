@@ -10,9 +10,31 @@ resource "aws_autoscaling_group" "this" {
   max_size                  = var.max_node_count
   health_check_grace_period = var.warmup_period
 
+  // NOTE: This tracks the launch template version explicitly rather than "$Latest".
+  //       "$Latest" never changes this resource, so instance_refresh below would never trigger.
   launch_template {
     id      = aws_launch_template.this.id
-    version = "$Latest"
+    version = aws_launch_template.this.latest_version
+  }
+
+  // Roll nodes onto the new launch template (new AMI, instance type, user data) without downtime.
+  // https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-refresh-overview.html
+  instance_refresh {
+    strategy = "Rolling"
+
+    preferences {
+      // The capacity provider protects every instance running tasks from scale-in.
+      // Without "Refresh", the refresh waits an hour for protection to clear, then fails.
+      // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instance-draining.html
+      scale_in_protected_instances = "Refresh"
+
+      // 100/100 launches a replacement before terminating an old node, so capacity never dips
+      // and drained tasks always have somewhere to land.
+      min_healthy_percentage = 100
+      max_healthy_percentage = 100
+
+      instance_warmup = tostring(var.warmup_period)
+    }
   }
 
   dynamic "tag" {
