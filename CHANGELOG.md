@@ -1,3 +1,6 @@
+# 0.3.2 (Jul 17, 2026)
+* Enabled metadata service in launch template instances.
+
 # 0.3.1 (Jul 17, 2026)
 * Updated cluster nodes to upgrade with zero downtime.
 
