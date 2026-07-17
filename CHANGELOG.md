@@ -1,3 +1,8 @@
+# 0.3.0 (Jun 25, 2026)
+* Upgraded `ns` provider to `0.11.1`.
+* Switched to `aws_tags` for proper resource attribution.
+* Switched to OpenTofu.
+
 # 0.2.10 (Feb 10, 2026)
 * Renamed deployers policy name.
 

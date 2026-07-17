@@ -11,3 +11,6 @@ subplatform: ec2
 type: ""
 appCategories: []
 is_public: true
+tool_name: opentofu
+include: []
+source_url: https://github.com/nullstone-modules/aws-ecs

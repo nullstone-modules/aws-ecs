@@ -18,7 +18,7 @@ resource "random_string" "resource_suffix" {
 }
 
 locals {
-  tags          = data.ns_workspace.this.tags
+  tags          = data.ns_workspace.this.aws_tags
   block_name    = data.ns_workspace.this.block_name
   resource_name = "${data.ns_workspace.this.block_ref}-${random_string.resource_suffix.result}"
 }
