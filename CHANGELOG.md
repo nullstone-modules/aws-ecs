@@ -1,3 +1,9 @@
+# 0.3.3 (Sep 08, 2026)
+* Fixed nodes failing to join the cluster when Docker starts before user data mounts the Docker volume.
+  User data now stops Docker before formatting/mounting `/dev/xvdcz` on `/var/lib/docker`, then restarts Docker and the ECS agent.
+  Previously this was a boot-time race that larger instance types (e.g. `m6a.xlarge`) lost consistently.
+* Volume formatting is now idempotent (`mkfs` only runs when no filesystem exists) and the fstab entry uses `nofail`.
+
 # 0.3.2 (Jul 17, 2026)
 * Enabled metadata service in launch template instances.
 
