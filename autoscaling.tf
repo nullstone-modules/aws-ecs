@@ -106,9 +106,14 @@ resource "aws_launch_template" "this" {
   user_data              = base64encode(local.user_data)
   tags                   = local.tags
 
-  tag_specifications {
-    resource_type = "instance"
-    tags          = merge(local.tags, { "Name" = "${local.block_name}/node" })
+  // ASG tag propagation stops at the instance; EBS volumes and ENIs only get tags from here.
+  dynamic "tag_specifications" {
+    for_each = toset(["instance", "volume", "network-interface"])
+
+    content {
+      resource_type = tag_specifications.value
+      tags          = merge(local.tags, { "Name" = "${local.block_name}/node" })
+    }
   }
 
   iam_instance_profile {

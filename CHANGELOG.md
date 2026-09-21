@@ -1,3 +1,6 @@
+# 0.3.4 (Sep 21, 2026)
+* Tagged EBS volumes and network interfaces created by the launch template with the workspace tags (`tag_specifications` for `volume` and `network-interface`).
+
 # 0.3.3 (Sep 08, 2026)
 * Fixed nodes failing to join the cluster when Docker starts before user data mounts the Docker volume.
   User data now stops Docker before formatting/mounting `/dev/xvdcz` on `/var/lib/docker`, then restarts Docker and the ECS agent.
