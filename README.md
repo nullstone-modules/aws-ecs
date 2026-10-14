@@ -76,5 +76,5 @@ Two symptoms and their causes:
 ## Task execution history
 
 EventBridge copies every ECS task state change for the cluster into the `<cluster>-executions` log group
-(`executions_retention_in_days`, default 90). Nullstone reads it so task-app runs stay visible after ECS
+(`executions_retention_in_days`, default 30). Nullstone reads it so task-app runs stay visible after ECS
 forgets stopped tasks (about one hour). If runs stop appearing, check the rule's `FailedInvocations` metric.
