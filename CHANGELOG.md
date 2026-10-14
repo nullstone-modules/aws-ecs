@@ -1,3 +1,8 @@
+# 0.4.0 (Oct 14, 2026)
+* Recorded ECS task state-change events for the cluster in a `<cluster>-executions` CloudWatch log group so Nullstone can show task-app execution history past ECS's one-hour retention.
+* Added `executions_retention_in_days` (default 90) and output `executions_log_group_name`.
+* Granted deployers read access to the executions log group.
+
 # 0.3.4 (Sep 21, 2026)
 * Tagged EBS volumes and network interfaces created by the launch template with the workspace tags (`tag_specifications` for `volume` and `network-interface`).
 

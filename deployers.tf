@@ -57,6 +57,22 @@ data "aws_iam_policy_document" "deployer" {
       values   = [aws_ecs_cluster.this.arn]
     }
   }
+
+  statement {
+    sid    = "AllowReadExecutions"
+    effect = "Allow"
+
+    actions = [
+      "logs:FilterLogEvents",
+      "logs:GetLogEvents",
+      "logs:DescribeLogStreams",
+    ]
+
+    resources = [
+      local.executions_log_group_arn,
+      "${local.executions_log_group_arn}:*",
+    ]
+  }
 }
 
 resource "aws_iam_policy" "deployers" {

@@ -32,3 +32,8 @@ output "log_retention_in_days" {
   value       = var.log_retention_in_days
   description = "number ||| The retention period for the CloudWatch logs for each ECS service in this cluster."
 }
+
+output "executions_log_group_name" {
+  value       = aws_cloudwatch_log_group.executions.name
+  description = "string ||| Name of the CloudWatch log group holding ECS task state-change events for this cluster."
+}

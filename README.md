@@ -72,3 +72,9 @@ Two symptoms and their causes:
   routine apply can start a rollout. Pin `local.ami` if you need applies to be inert.
 - `managed_draining = "ENABLED"` on the capacity provider is what makes drains graceful.
   `managed_termination_protection` alone will hard-kill tasks during a refresh.
+
+## Task execution history
+
+EventBridge copies every ECS task state change for the cluster into the `<cluster>-executions` log group
+(`executions_retention_in_days`, default 90). Nullstone reads it so task-app runs stay visible after ECS
+forgets stopped tasks (about one hour). If runs stop appearing, check the rule's `FailedInvocations` metric.
